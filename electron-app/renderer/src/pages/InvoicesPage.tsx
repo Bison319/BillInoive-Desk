@@ -4,7 +4,7 @@ import {
   Dialog, DialogTitle, DialogContent, DialogActions, Alert,
 } from '@mui/material';
 import { DataGrid, GridColDef } from '@mui/x-data-grid';
-import { Add, Cancel, PictureAsPdf, Payment, Search } from '@mui/icons-material';
+import { Add, Cancel, PictureAsPdf, Payment, Search, Download, Visibility } from '@mui/icons-material';
 import { useNavigate } from 'react-router-dom';
 import { invoiceApi, paymentApi } from '../services/api';
 
@@ -22,6 +22,7 @@ export default function InvoicesPage() {
   const [payDialog, setPayDialog] = useState<any>(null);
   const [payForm, setPayForm] = useState({ amount: '', paymentMethod: 'CASH', transactionReference: '', notes: '' });
   const [payError, setPayError] = useState('');
+  const [pdfPreview, setPdfPreview] = useState<{ url: string; invoiceNumber: string } | null>(null);
 
   const loadData = useCallback(async () => {
     try {
@@ -57,16 +58,27 @@ export default function InvoicesPage() {
     }
   };
 
-  const handleDownload = async (id: number, invoiceNumber: string) => {
+  const handleViewPdf = async (id: number, invoiceNumber: string) => {
     try {
       const res = await invoiceApi.downloadPdf(String(id));
       const url = window.URL.createObjectURL(new Blob([res.data], { type: 'application/pdf' }));
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = `${invoiceNumber}.pdf`;
-      a.click();
-      window.URL.revokeObjectURL(url);
+      setPdfPreview({ url, invoiceNumber });
     } catch (e) {}
+  };
+
+  const handleDownloadPdf = () => {
+    if (!pdfPreview) return;
+    const a = document.createElement('a');
+    a.href = pdfPreview.url;
+    a.download = `${pdfPreview.invoiceNumber}.pdf`;
+    a.click();
+  };
+
+  const handleClosePdf = () => {
+    if (pdfPreview) {
+      window.URL.revokeObjectURL(pdfPreview.url);
+      setPdfPreview(null);
+    }
   };
 
   const handleCancel = async (id: number) => {
@@ -92,7 +104,7 @@ export default function InvoicesPage() {
     { field: 'actions', headerName: 'Actions', width: 130, sortable: false,
       renderCell: (p) => (
         <Box sx={{ display: 'flex', gap: 0.5 }}>
-          <IconButton size="small" onClick={() => handleDownload(p.row.id, p.row.invoiceNumber)} color="primary" title="Download Invoice PDF"><PictureAsPdf fontSize="small" /></IconButton>
+          <IconButton size="small" onClick={() => handleViewPdf(p.row.id, p.row.invoiceNumber)} color="primary" title="View Invoice PDF"><Visibility fontSize="small" /></IconButton>
           {p.row.pendingAmount > 0 && p.row.invoiceStatus !== 'CANCELLED' && (
             <IconButton size="small" color="success" title="Record Payment" onClick={() => {
               setPayDialog(p.row);
@@ -140,6 +152,32 @@ export default function InvoicesPage() {
           sx={{ border: 0, '& .MuiDataGrid-columnHeaders': { bgcolor: '#f8f9ff', fontWeight: 700 }, '& .MuiDataGrid-row:hover': { bgcolor: '#f8f9ff' } }}
         />
       </Box>
+
+      <Dialog open={!!pdfPreview} onClose={handleClosePdf} maxWidth="md" fullWidth
+        PaperProps={{ sx: { height: '90vh', display: 'flex', flexDirection: 'column' } }}>
+        <DialogTitle sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+          <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+            <PictureAsPdf color="primary" />
+            <Typography variant="h6">Invoice - {pdfPreview?.invoiceNumber}</Typography>
+          </Box>
+          <Button variant="contained" startIcon={<Download />} onClick={handleDownloadPdf}
+            sx={{ background: 'linear-gradient(135deg, #1a237e 0%, #3949ab 100%)' }}>
+            Download
+          </Button>
+        </DialogTitle>
+        <DialogContent sx={{ flex: 1, p: 0, overflow: 'hidden' }}>
+          {pdfPreview && (
+            <iframe
+              src={pdfPreview.url}
+              title="Invoice PDF"
+              style={{ width: '100%', height: '100%', border: 'none' }}
+            />
+          )}
+        </DialogContent>
+        <DialogActions sx={{ px: 3, pb: 2 }}>
+          <Button onClick={handleClosePdf}>Close</Button>
+        </DialogActions>
+      </Dialog>
 
       <Dialog open={!!payDialog} onClose={() => setPayDialog(null)} maxWidth="sm" fullWidth>
         <DialogTitle>Record Payment - {payDialog?.invoiceNumber}</DialogTitle>

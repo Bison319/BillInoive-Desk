@@ -60,9 +60,9 @@ export default function LoginPage() {
           <Box sx={{ textAlign: 'center', mb: 4 }}>
             <Box sx={{
               width: 72, height: 72, borderRadius: 4, mx: 'auto', mb: 2,
-              background: 'linear-gradient(135deg, #ff6d00 0%, #ff9e40 100%)',
+              background: 'linear-gradient(135deg, #d4a017 0%, #f5c842 100%)',
               display: 'flex', alignItems: 'center', justifyContent: 'center',
-              boxShadow: '0 8px 24px rgba(255,109,0,0.35)',
+              boxShadow: '0 8px 24px rgba(212,160,23,0.35)',
             }}>
               <Store sx={{ fontSize: 40, color: '#fff' }} />
             </Box>

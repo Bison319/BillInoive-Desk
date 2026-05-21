@@ -62,7 +62,7 @@
           ]
         }
       ],
-      "icon": "assets/icon.ico",
+      "icon": "assets/BIcon.ico",
       "publisherName": "AVP Nexus",
       "sign": false,
       "forceCodeSigning": false
@@ -73,9 +73,9 @@
       "createDesktopShortcut": true,
       "createStartMenuShortcut": true,
       "shortcutName": "AVP Nexus",
-      "installerIcon": "assets/icon.ico",
-      "uninstallerIcon": "assets/icon.ico",
-      "installerHeaderIcon": "assets/icon.ico",
+      "installerIcon": "assets/BIcon.ico",
+      "uninstallerIcon": "assets/BIcon.ico",
+      "installerHeaderIcon": "assets/BIcon.ico",
       "license": "../docs/LICENSE.txt"
     },
     "linux": {

@@ -53,9 +53,9 @@ export default function Layout() {
         <Box sx={{ p: 3, textAlign: 'center' }}>
           <Box sx={{
             width: 56, height: 56, borderRadius: 3, mx: 'auto', mb: 1.5,
-            background: 'linear-gradient(135deg, #ff6d00 0%, #ff9e40 100%)',
+            background: 'linear-gradient(135deg, #d4a017 0%, #f5c842 100%)',
             display: 'flex', alignItems: 'center', justifyContent: 'center',
-            boxShadow: '0 4px 16px rgba(255,109,0,0.4)',
+            boxShadow: '0 4px 16px rgba(212,160,23,0.4)',
           }}>
             <Store sx={{ fontSize: 32, color: '#fff' }} />
           </Box>
@@ -85,7 +85,7 @@ export default function Layout() {
                   }}
                 >
                   <ListItemIcon sx={{
-                    color: isActive ? '#ff9e40' : 'rgba(255,255,255,0.6)',
+                    color: isActive ? '#f5c842' : 'rgba(255,255,255,0.6)',
                     minWidth: 40,
                     transition: 'color 0.2s',
                   }}>
@@ -96,7 +96,7 @@ export default function Layout() {
                     sx={{ '& .MuiTypography-root': { fontWeight: isActive ? 700 : 400, fontSize: 14, letterSpacing: '0.01em' } }}
                   />
                   {isActive && (
-                    <Box sx={{ width: 4, height: 24, borderRadius: 2, bgcolor: '#ff6d00', ml: 1 }} />
+                    <Box sx={{ width: 4, height: 24, borderRadius: 2, bgcolor: '#d4a017', ml: 1 }} />
                   )}
                 </ListItemButton>
               </ListItem>
@@ -111,7 +111,7 @@ export default function Layout() {
           }}>
             <Avatar sx={{
               width: 36, height: 36,
-              background: 'linear-gradient(135deg, #ff6d00 0%, #ff9e40 100%)',
+              background: 'linear-gradient(135deg, #d4a017 0%, #f5c842 100%)',
               fontSize: 14, fontWeight: 700,
             }}>
               {(fullName || username || 'U').charAt(0).toUpperCase()}
@@ -121,7 +121,7 @@ export default function Layout() {
               <Typography variant="caption" sx={{ color: 'rgba(255,255,255,0.5)', fontSize: 11 }}>{role}</Typography>
             </Box>
             <Tooltip title="Logout">
-              <IconButton size="small" onClick={handleLogout} sx={{ color: 'rgba(255,255,255,0.5)', '&:hover': { color: '#ff6d00' } }}>
+              <IconButton size="small" onClick={handleLogout} sx={{ color: 'rgba(255,255,255,0.5)', '&:hover': { color: '#d4a017' } }}>
                 <Logout fontSize="small" />
               </IconButton>
             </Tooltip>
@@ -154,14 +154,14 @@ export default function Layout() {
               label={role}
               size="small"
               sx={{
-                bgcolor: '#1a237e', color: '#fff', fontWeight: 600,
+                bgcolor: '#d4a017', color: '#fff', fontWeight: 600,
                 '& .MuiChip-label': { px: 1.5 },
               }}
             />
           </Toolbar>
         </AppBar>
 
-        <Box sx={{ flexGrow: 1, p: 3, bgcolor: '#f0f4f8', overflow: 'auto', minWidth: 0 }}>
+        <Box sx={{ flexGrow: 1, p: 3, bgcolor: '#f5f3ee', overflow: 'auto', minWidth: 0 }}>
           <Outlet />
         </Box>
         <Box sx={{

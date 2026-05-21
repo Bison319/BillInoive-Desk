@@ -218,8 +218,14 @@ public class PdfService {
     }
 
     private String getSetting(String key, String defaultValue) {
+        // Try underscore key first (used by frontend), then dot key (used by seed data)
+        String underscoreKey = key.replace('.', '_');
+        String result = settingRepository.findById(underscoreKey)
+                .map(s -> s.getSettingValue() != null && !s.getSettingValue().isEmpty() ? s.getSettingValue() : null)
+                .orElse(null);
+        if (result != null) return result;
         return settingRepository.findById(key)
-                .map(s -> s.getSettingValue() != null ? s.getSettingValue() : defaultValue)
+                .map(s -> s.getSettingValue() != null && !s.getSettingValue().isEmpty() ? s.getSettingValue() : defaultValue)
                 .orElse(defaultValue);
     }
 

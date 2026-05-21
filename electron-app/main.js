@@ -47,7 +47,7 @@ async function askCompanyName() {
       maximizable: false,
       frame: true,
       title: 'BillCraft - First Time Setup',
-      icon: path.join(__dirname, 'assets', 'icon.ico'),
+      icon: path.join(__dirname, 'assets', 'BIcon.ico'),
       webPreferences: {
         nodeIntegration: true,
         contextIsolation: false,
@@ -246,13 +246,17 @@ function createMainWindow() {
     minHeight: 700,
     show: false,
     title: 'AVP Nexus - Billing & Payment Platform',
-    icon: path.join(__dirname, 'assets', 'icon.ico'),
+    icon: path.join(__dirname, 'assets', 'BillingIcon.ico'),
+    autoHideMenuBar: true,
     webPreferences: {
       nodeIntegration: false,
       contextIsolation: true,
       preload: path.join(__dirname, 'preload.js')
     }
   });
+
+  mainWindow.setMenuBarVisibility(false);
+  mainWindow.setMenu(null);
 
   // Load React app
   const isDev = !app.isPackaged;
@@ -425,7 +429,7 @@ ipcMain.handle('get-app-data-path', () => getAppDataPath());
 
 ipcMain.handle('show-notification', (event, { title, body }) => {
   if (Notification.isSupported()) {
-    new Notification({ title, body, icon: path.join(__dirname, 'assets', 'icon.ico') }).show();
+    new Notification({ title, body, icon: path.join(__dirname, 'assets', 'BIcon.ico') }).show();
   }
 });
 

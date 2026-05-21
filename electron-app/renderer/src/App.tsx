@@ -17,11 +17,11 @@ import UserProfilePage from './pages/UserProfilePage';
 const theme = createTheme({
   palette: {
     primary: { main: '#1a237e', light: '#3949ab', dark: '#0d1642' },
-    secondary: { main: '#ff6d00', light: '#ff9e40', dark: '#c43e00' },
+    secondary: { main: '#d4a017', light: '#f5c842', dark: '#9e7a0c' },
     success: { main: '#00c853', light: '#5efc82', dark: '#009624' },
     warning: { main: '#ffd600', light: '#ffff52', dark: '#c7a500' },
     error: { main: '#d50000', light: '#ff5131', dark: '#9b0000' },
-    background: { default: '#f0f4f8', paper: '#ffffff' },
+    background: { default: '#f5f3ee', paper: '#ffffff' },
   },
   typography: {
     fontFamily: '"Inter", "Segoe UI", "Roboto", sans-serif',
@@ -36,12 +36,12 @@ const theme = createTheme({
     MuiButton: {
       styleOverrides: {
         root: { textTransform: 'none', fontWeight: 600, borderRadius: 10, padding: '8px 20px' },
-        contained: { boxShadow: '0 4px 14px rgba(26,35,126,0.25)', '&:hover': { boxShadow: '0 6px 20px rgba(26,35,126,0.35)' } },
+        contained: { boxShadow: '0 4px 14px rgba(212,160,23,0.3)', '&:hover': { boxShadow: '0 6px 20px rgba(212,160,23,0.45)' } },
       },
     },
     MuiCard: {
       styleOverrides: {
-        root: { boxShadow: '0 4px 24px rgba(0,0,0,0.06)', border: '1px solid rgba(0,0,0,0.04)', transition: 'transform 0.2s, box-shadow 0.2s', '&:hover': { transform: 'translateY(-2px)', boxShadow: '0 8px 32px rgba(0,0,0,0.1)' } },
+        root: { boxShadow: '0 4px 24px rgba(0,0,0,0.06)', border: '1px solid rgba(212,160,23,0.08)', transition: 'transform 0.2s, box-shadow 0.2s', '&:hover': { transform: 'translateY(-2px)', boxShadow: '0 8px 32px rgba(212,160,23,0.15)' } },
       },
     },
     MuiPaper: { styleOverrides: { rounded: { borderRadius: 16 } } },

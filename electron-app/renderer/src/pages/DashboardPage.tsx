@@ -4,7 +4,7 @@ import { Receipt, Payment, TrendingUp, AccountBalance } from '@mui/icons-materia
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, PieChart, Pie, Cell } from 'recharts';
 import { reportApi } from '../services/api';
 
-const COLORS = ['#1a237e', '#ff6d00', '#00c853', '#d50000', '#8e24aa', '#00bcd4'];
+const COLORS = ['#1a237e', '#d4a017', '#00c853', '#d50000', '#8e24aa', '#00bcd4'];
 
 interface DashboardData {
   totalSales: number;
@@ -46,7 +46,7 @@ export default function DashboardPage() {
 
   const stats = [
     { title: 'Total Revenue', value: fmt(data?.totalSales || 0), icon: <TrendingUp />, color: '#1a237e', bg: '#e8eaf6' },
-    { title: 'Pending', value: fmt(data?.pendingPayments || 0), icon: <Payment />, color: '#ff6d00', bg: '#fff3e0' },
+    { title: 'Pending', value: fmt(data?.pendingPayments || 0), icon: <Payment />, color: '#d4a017', bg: '#fdf8e8' },
     { title: 'GST Collected', value: fmt(data?.gstCollected || 0), icon: <AccountBalance />, color: '#00c853', bg: '#e8f5e9' },
     { title: 'Invoices', value: String(data?.totalInvoices || 0), icon: <Receipt />, color: '#8e24aa', bg: '#f3e5f5' },
   ];
