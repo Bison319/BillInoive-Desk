@@ -1,0 +1,96 @@
+{
+  "name": "avp-nexus",
+  "version": "1.0.0",
+  "description": "AVP Nexus - Desktop Billing & Payment Platform",
+  "main": "main.js",
+  "author": "BillCraft",
+  "license": "MIT",
+  "scripts": {
+    "start": "electron .",
+    "dev": "concurrently \"cd ../electron-app/renderer && npm start\" \"electron .\"",
+    "build-renderer": "cd renderer && npm run build",
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder",
+    "dist-win": "electron-builder --win"
+  },
+  "dependencies": {
+    "axios": "^1.7.7",
+    "electron-log": "^5.2.4",
+    "tree-kill": "^1.2.2"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.0",
+    "electron": "^33.2.0",
+    "electron-builder": "^25.1.8",
+    "electron-packager": "^17.1.2",
+    "sharp": "^0.34.5"
+  },
+  "build": {
+    "appId": "com.avpnexus.desktop",
+    "productName": "AVP Nexus",
+    "copyright": "Copyright © 2026 AVP Nexus",
+    "directories": {
+      "output": "../installer/output"
+    },
+    "files": [
+      "main.js",
+      "preload.js",
+      "splash.html",
+      "renderer/build/**/*",
+      "!renderer/src/**",
+      "!renderer/node_modules/**"
+    ],
+    "extraResources": [
+      {
+        "from": "../springboot-backend/build/libs/billcraft-backend.jar",
+        "to": "backend/billcraft-backend.jar"
+      },
+      {
+        "from": "../runtime/jre",
+        "to": "jre",
+        "filter": [
+          "**/*"
+        ]
+      }
+    ],
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "icon": "assets/icon.ico",
+      "publisherName": "AVP Nexus",
+      "sign": false,
+      "forceCodeSigning": false
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "AVP Nexus",
+      "installerIcon": "assets/icon.ico",
+      "uninstallerIcon": "assets/icon.ico",
+      "installerHeaderIcon": "assets/icon.ico",
+      "license": "../docs/LICENSE.txt"
+    },
+    "linux": {
+      "target": [
+        "AppImage",
+        "deb"
+      ],
+      "icon": "assets/icon.png",
+      "category": "Office"
+    },
+    "mac": {
+      "target": [
+        "dmg"
+      ],
+      "icon": "assets/icon.icns"
+    }
+  }
+}

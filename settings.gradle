@@ -1,0 +1,2 @@
+rootProject.name = 'billcraft-desktop'
+include 'springboot-backend'

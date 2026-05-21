@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0a0e27"/>
+      <stop offset="50%" style="stop-color:#1a1f4e"/>
+      <stop offset="100%" style="stop-color:#0d1233"/>
+    </linearGradient>
+    <linearGradient id="glow" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#00f5ff"/>
+      <stop offset="50%" style="stop-color:#7b2ff7"/>
+      <stop offset="100%" style="stop-color:#00f5ff"/>
+    </linearGradient>
+    <linearGradient id="inner" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#00e5ff"/>
+      <stop offset="100%" style="stop-color:#651fff"/>
+    </linearGradient>
+    <filter id="neon">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <filter id="outerGlow">
+      <feGaussianBlur stdDeviation="6" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="256" height="256" rx="40" fill="url(#bg)"/>
+  
+  <!-- Outer hexagonal ring -->
+  <polygon points="128,20 220,74 220,182 128,236 36,182 36,74" 
+    fill="none" stroke="url(#glow)" stroke-width="2.5" opacity="0.6" filter="url(#outerGlow)"/>
+  
+  <!-- Inner hexagonal ring -->
+  <polygon points="128,45 195,82 195,174 128,211 61,174 61,82" 
+    fill="none" stroke="#00e5ff" stroke-width="1.5" opacity="0.4"/>
+  
+  <!-- Circuit lines -->
+  <line x1="128" y1="20" x2="128" y2="45" stroke="#00f5ff" stroke-width="1" opacity="0.5"/>
+  <line x1="220" y1="74" x2="195" y2="82" stroke="#00f5ff" stroke-width="1" opacity="0.5"/>
+  <line x1="220" y1="182" x2="195" y2="174" stroke="#00f5ff" stroke-width="1" opacity="0.5"/>
+  <line x1="128" y1="236" x2="128" y2="211" stroke="#00f5ff" stroke-width="1" opacity="0.5"/>
+  <line x1="36" y1="182" x2="61" y2="174" stroke="#00f5ff" stroke-width="1" opacity="0.5"/>
+  <line x1="36" y1="74" x2="61" y2="82" stroke="#00f5ff" stroke-width="1" opacity="0.5"/>
+  
+  <!-- Central "N" letter (Nexus) with sci-fi styling -->
+  <g filter="url(#neon)">
+    <!-- Stylized "N" -->
+    <path d="M 88 170 L 88 86 L 100 86 L 155 155 L 155 86 L 168 86 L 168 170 L 156 170 L 100 101 L 100 170 Z" 
+      fill="url(#inner)" opacity="0.95"/>
+  </g>
+  
+  <!-- Accent dots at hexagon vertices -->
+  <circle cx="128" cy="20" r="3" fill="#00f5ff" opacity="0.8"/>
+  <circle cx="220" cy="74" r="3" fill="#7b2ff7" opacity="0.8"/>
+  <circle cx="220" cy="182" r="3" fill="#00f5ff" opacity="0.8"/>
+  <circle cx="128" cy="236" r="3" fill="#7b2ff7" opacity="0.8"/>
+  <circle cx="36" cy="182" r="3" fill="#00f5ff" opacity="0.8"/>
+  <circle cx="36" cy="74" r="3" fill="#7b2ff7" opacity="0.8"/>
+  
+  <!-- Scanning line effect -->
+  <rect x="70" y="125" width="116" height="1" fill="#00f5ff" opacity="0.3"/>
+  
+  <!-- Small tech details -->
+  <rect x="75" y="55" width="8" height="2" fill="#00f5ff" opacity="0.4"/>
+  <rect x="173" y="55" width="8" height="2" fill="#7b2ff7" opacity="0.4"/>
+  <rect x="75" y="199" width="8" height="2" fill="#7b2ff7" opacity="0.4"/>
+  <rect x="173" y="199" width="8" height="2" fill="#00f5ff" opacity="0.4"/>
+</svg>

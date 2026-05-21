@@ -1,0 +1,51 @@
+# Build outputs
+springboot-backend/build/
+springboot-backend/bin/
+electron-app/renderer/build/
+electron-app/renderer/node_modules/
+electron-app/node_modules/
+build/
+backend/build/
+frontend/build/
+
+# Gradle
+.gradle/
+gradle/wrapper/gradle-wrapper.jar
+
+# IDE
+.idea/
+*.iml
+.vscode/
+.settings/
+.project
+.classpath
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Runtime (bundled JRE - too large for git)
+runtime/
+
+# Tools (bundled Node.js - too large for git)
+tools/
+
+# Installer output (packaged Electron app - too large)
+installer/output/
+
+# Electron packaged output
+electron-app/dist/
+
+# Node modules anywhere
+node_modules/
+
+# JAR files
+*.jar
+
+# Logs
+*.log
+logs/
+
+# Temp
+*.tmp
+*.swp

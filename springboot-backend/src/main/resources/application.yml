@@ -1,0 +1,90 @@
+# ===========================================================
+# BillCraft Desktop - Spring Boot Backend Configuration
+# ===========================================================
+
+server:
+  port: 8080
+  shutdown: graceful
+
+spring:
+  application:
+    name: billcraft-desktop
+  lifecycle:
+    timeout-per-shutdown-phase: 10s
+
+  # H2 File-Based Persistent Database
+  datasource:
+    url: jdbc:h2:file:${BILLCRAFT_DB_PATH:./data/billcraftdb};DB_CLOSE_ON_EXIT=TRUE;AUTO_RECONNECT=TRUE;MODE=LEGACY
+    driver-class-name: org.h2.Driver
+    username: sa
+    password: BillCraft@2024Secure
+    hikari:
+      maximum-pool-size: 10
+      minimum-idle: 2
+      idle-timeout: 300000
+      connection-timeout: 20000
+
+  h2:
+    console:
+      enabled: ${H2_CONSOLE_ENABLED:false}
+      path: /h2-console
+
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    show-sql: false
+    open-in-view: false
+    properties:
+      hibernate:
+        format_sql: true
+        jdbc:
+          time_zone: Asia/Kolkata
+
+  flyway:
+    enabled: true
+    baseline-on-migrate: true
+    locations: classpath:db/migration
+    baseline-version: 0
+
+  jackson:
+    serialization:
+      write-dates-as-timestamps: false
+    time-zone: Asia/Kolkata
+
+# JWT Configuration
+jwt:
+  secret: BillCraftDesktopSuperSecretKeyForJWTAuth2024Enterprise!@#$%
+  expiration: 86400000
+
+# Actuator
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+  endpoint:
+    health:
+      show-details: when-authorized
+
+# Logging
+logging:
+  level:
+    root: INFO
+    com.billcraft: DEBUG
+    org.springframework.security: WARN
+  file:
+    name: ${BILLCRAFT_LOG_PATH:./logs/billcraft.log}
+  logback:
+    rollingpolicy:
+      max-file-size: 10MB
+      max-history: 30
+      total-size-cap: 500MB
+
+# BillCraft Custom Config
+billcraft:
+  backup:
+    directory: ${BILLCRAFT_BACKUP_PATH:./backups}
+    max-backups: 50
+  company:
+    name: BillCraft
+    tagline: Billing & Payment Platform
